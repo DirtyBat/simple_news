@@ -12,6 +12,7 @@ from .serializers import NewsDataSerializer
 
 import random
 import string
+import re
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -26,7 +27,24 @@ class NewsDataView(viewsets.ModelViewSet):
 class SubmitNewsView(APIView):
     def post(self, request):
         data = request.data
-        # todo
+        title = data.get('title')
+        summary = data.get('summary')
+        headline = data.get('headline')
+        content = data.get('content')
+        cover = re.search(r'<img src="([^"]*)',content)
+        
+        if not cover:
+            cover = "http://47.103.209.239/api/pic/?code=ETfHx14vX3"
+        else:
+            cover = cover.group(1)
+
+        NewsData(title=title,
+                 summary=summary,
+                 cover=cover,
+                 headline=headline,
+                 content=content).save()
+        
+        return Response({}, HTTP_200_OK)
 
 
 class SubmitPicView(APIView):
