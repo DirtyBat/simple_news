@@ -9,7 +9,7 @@
       class="quill-upload"
       accept=".JPG, .PNG, .JPEG, .jpg, .png, .jpeg"
       :action="serviceUrl"
-      style="display: none;width:0;height:50vh"
+      style="display: none;width:0;"
       :show-file-list="false"
       :on-success="success"
       :before-upload="beforeAvatarUpload"
@@ -64,7 +64,6 @@ export default {
       [{ font: [] }],
       [{ align: [] }],
       ["image"],
-      ["clean"] // remove formatting button
     ];
     return {
       serviceUrl: process.env.API_ROOT + "api/pic",
@@ -88,6 +87,9 @@ export default {
     };
   },
   methods: {
+    getContent() {
+        return this.editorData;
+    },
     beforeAvatarUpload(file) {
       this.$emit("beforeAvatarUpload", file);
     },
@@ -123,3 +125,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.quill-editor{
+    height: 300px;
+    min-height: 300px;
+    margin-bottom:50px; 
+}
+
+
+</style>

@@ -13,7 +13,6 @@
 </template>
 <script>
 import NewCard from './NewCard';
-import axios from 'axios'
 export default {
   name: "news",
   components: { NewCard },
@@ -25,8 +24,8 @@ export default {
   },
   methods: {},
   mounted () {
-    axios
-      .get('http://47.103.209.239/api/news_data/')
+    this.$axios
+      .get('api/news_data/')
       .then(response => (this.news_data = response.data))
       .catch(function (error) { // 请求失败处理
         console.log(error);
