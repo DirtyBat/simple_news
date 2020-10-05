@@ -20,7 +20,7 @@ sys.setdefaultencoding('utf-8')
 class NewsDataView(viewsets.ModelViewSet):
     queryset = NewsData.objects.all()
     serializer_class = NewsDataSerializer
-    filter_fields = ('id', 'title')
+    filter_fields = ('id', 'title'，'headline')
 
 
 class SubmitNewsView(APIView):
