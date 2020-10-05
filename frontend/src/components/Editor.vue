@@ -7,8 +7,9 @@
       :limit="limit"
       name="pic"
       class="quill-upload"
+      accept=".JPG, .PNG, .JPEG, .jpg, .png, .jpeg"
       :action="serviceUrl"
-      style="display: none;width:0"
+      style="display: none;width:0;height:50vh"
       :show-file-list="false"
       :on-success="success"
       :before-upload="beforeAvatarUpload"
@@ -30,10 +31,16 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import { quillEditor, Quill } from "vue-quill-editor";
+import resizeImage from 'quill-image-resize-module'
+import { ImageDrop } from 'quill-image-drop-module';
+Quill.register('modules/imageDrop', ImageDrop);
+Quill.register('modules/resizeImage ', resizeImage )
+Vue.use(quillEditor)
 export default {
   name: "editor",
   components: { quillEditor },
@@ -64,6 +71,8 @@ export default {
       editorOption: {
         placeholder: "请输入内容",
         modules: {
+          imageDrop: true,
+          imageResize:true,
           toolbar: {
             container: toolbarOptions,
             handlers: {
@@ -83,7 +92,7 @@ export default {
       this.$emit("beforeAvatarUpload", file);
     },
     success(res, file, fileList) {
-        console.log(res);
+      console.log(res);
       // res为图片服务器返回的数据
       // 获取富文本组件实例
       let vm = this;
@@ -91,11 +100,7 @@ export default {
       // 获取光标所在位置
       const pos = quill.selection.savedRange.index; //这个得注意下，网上很多都是不对的
       // 插入图片到光标位置
-      quill.insertEmbed(
-        pos,
-        "image",
-        this.serviceUrl + "?id=" + res["id"],
-      );
+      quill.insertEmbed(pos, "image", this.serviceUrl + "?code=" + res["code"]);
       // 调整光标到最后
       quill.setSelection(length + 1);
       // loading动画消失
