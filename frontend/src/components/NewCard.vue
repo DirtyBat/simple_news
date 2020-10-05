@@ -41,6 +41,8 @@ export default {
   }
   .image{
     width: 100%;
+    max-height:270px;
+    max-width:480px;
     display: block;
   }
   .clearfix:before,
@@ -53,7 +55,6 @@ export default {
   }
   .box-card {
     width: 800px;
-    height: 300px;
   }
   .el-aside {
     width: 480px;
