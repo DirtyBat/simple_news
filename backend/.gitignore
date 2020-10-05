@@ -145,3 +145,6 @@ cython_debug/
 
 # migrations
 migrations
+
+# pics
+pics

@@ -17,7 +17,7 @@ class NewsData(models.Model):
 
 
 class Pics(models.Model):
-    # 图片id
-    id = models.AutoField(primary_key=True)
+    # 图片code
+    code = models.CharField(max_length=50,default="")
     # 图片
     pic = models.ImageField(upload_to="./pics/%Y-%m-%d")
