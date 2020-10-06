@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^api/', include(routers.urls)),
     url(r'^api/submit_news', views.SubmitNewsView.as_view()),
     url(r'^api/pic', views.SubmitPicView.as_view()),
+    url(r'^.*?$', views.index),
 ]
