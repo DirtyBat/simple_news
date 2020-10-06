@@ -27,7 +27,8 @@ export default {
   data() {
     return {
       // api get data
-      news_data: null,
+      current_news_data: [],
+      news_total: 0,
       // page set
       current_page:0,
       page_size:3,
@@ -37,27 +38,32 @@ export default {
     handleCurrentChange: function(cur_page){
       // el-pagination start from 1 not 0
       this.current_page = cur_page -1;
-    }
-  },
-  computed:{
-    current_news_data: function(){
-      if (this.news_data)
-        return this.news_data.slice(this.current_page * this.page_size,
-        (this.current_page + 1) * this.page_size)
+      this.get_data_from_api();
     },
-    news_total: function(){
-        return this.news_data?this.news_data.length:0;
-    }
-  },
-  mounted () {
+    get_data_from_api:function(){
+    var that = this;
     this.$axios
-      .get('api/news_data/')
-      .then(response => (this.news_data = response.data))
+      .get('api/news_data/',{
+          params:{
+            limit: that.page_size,
+            offset: that.current_page * that.page_size,
+          }
+        })
+      .then(function (response) {
+          that.current_news_data = response.data.results;
+          that.news_total = response.data.count;
+      })
       .catch(function (error) { // 请求失败处理
         console.log(error);
         alert("get api data fail!")
       });
   }
+
+  },
+  computed:{},
+  mounted () {
+    this.get_data_from_api();
+  },
 };
 </script>
 

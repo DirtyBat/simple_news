@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 .header {
-  position: absolute;
+  position: absolute; 
   line-height: 50px;
   top: 0px;
   left: 0px;
