@@ -4,11 +4,12 @@
 from django.http import HttpResponse
 from rest_framework import viewsets
 from rest_framework.views import APIView
+from rest_framework.pagination import LimitOffsetPagination
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from .models import NewsData, Pics
-from .serializers import NewsDataSerializer
+from .serializers import NewsDataSerializer, NewsDetailSerializer
 
 import random
 import string
@@ -21,7 +22,14 @@ sys.setdefaultencoding('utf-8')
 class NewsDataView(viewsets.ModelViewSet):
     queryset = NewsData.objects.all()
     serializer_class = NewsDataSerializer
-    filter_fields = ('id', 'title','headline')
+    pagination_class = LimitOffsetPagination
+    filter_fields = ('id', 'title', 'headline')
+
+
+class NewsDetailView(viewsets.ModelViewSet):
+    queryset = NewsData.objects.all()
+    serializer_class = NewsDetailSerializer
+    filter_fields = ('id',)
 
 
 class SubmitNewsView(APIView):

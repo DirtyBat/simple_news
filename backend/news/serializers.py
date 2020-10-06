@@ -4,4 +4,10 @@ from .models import NewsData
 class NewsDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsData
-        exclude = []
+        exclude = ['content']
+
+
+class NewsDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsData
+        exclude = ['headline', 'summary', 'cover']
