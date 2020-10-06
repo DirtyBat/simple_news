@@ -1,12 +1,17 @@
 <template>
   <div id="app">
+    <Header></Header>
     <router-view/>
   </div>
 </template>
 
 <script>
+import Header from './components/Header'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Header,
+  }
 }
 </script>
 
@@ -20,6 +25,6 @@ export default {
 }
 
 body {
-  padding-top:55px; 
+  padding:55px 20% 10px 20%; 
 }
 </style>

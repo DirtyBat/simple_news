@@ -128,9 +128,8 @@ export default {
 
 <style scoped>
 .quill-editor{
-    height: 500px;
-    min-height: 300px;
-    margin-bottom:50px; 
+    height: 55vh;
+    margin-bottom:70px; 
 }
 
 

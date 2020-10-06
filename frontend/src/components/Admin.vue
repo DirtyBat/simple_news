@@ -1,5 +1,9 @@
 <template>
   <div class="edit-page">
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:13px;margin-left:3px">
+      <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
+      <el-breadcrumb-item>Editor</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-input v-model="title" placeholder="请输入标题..." maxlength="20" show-word-limit>
       <template slot="prepend">标题</template>
     </el-input>
@@ -17,7 +21,7 @@
 import Editor from "./Editor";
 export default {
   components: {
-    Editor
+    Editor,
   },
   data() {
     return {
@@ -48,10 +52,6 @@ export default {
 </script>
 
 <style scoped>
-.edit-page {
-  margin-left: 15%;
-  margin-right: 15%;
-}
 
 .el-input {
   padding-bottom: 10px;
