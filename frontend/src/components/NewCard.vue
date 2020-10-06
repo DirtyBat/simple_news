@@ -2,19 +2,19 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>{{title}}</span>
-        <span style="float: right; padding: 3px 0; color: gray; ">{{date}}</span>
+        <span class="title">{{title}}</span>
+        <span class="date"><i class="el-icon-time">{{' '+ date}}</i></span>
       </div>
       <el-container>
+        <el-main>
+          <div class="summary">
+            {{summary}}
+          </div>
+        </el-main>
         <el-aside>
           <!--<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">-->
           <img v-bind:src="image_url" class="image">
         </el-aside>
-        <el-main>
-          <div class="text">
-            {{summary}}
-          </div>
-      </el-main>
       </el-container>
     </el-card>
   </div>
@@ -36,8 +36,19 @@ export default {
 </script>
 
 <style scoped>
-  .text {
-    font-size: 14px;
+  .title{
+    font-size: 18px;
+    font-weight:bold;
+    font-family:"PingFang SC";
+  }
+  .summary {
+    font-size: 16px;
+  }
+  .date {
+    float: right;
+    padding: 3px 0;
+    color: gray;
+    font-size: 12px;
   }
   .image{
     width: 100%;
@@ -55,6 +66,7 @@ export default {
   }
   .box-card {
     width: 800px;
+    border-radius: 8px;
   }
   .el-aside {
     width: 480px;
