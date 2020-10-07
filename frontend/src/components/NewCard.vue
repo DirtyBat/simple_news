@@ -5,7 +5,7 @@
         <span class="title">{{title}}</span>
         <span class="date"><i class="el-icon-time">{{' '+ date}}</i></span>
       </div>
-      <el-container>c
+      <el-container>
         <el-main>
           <div class="summary">
             {{summary}}
@@ -59,6 +59,7 @@ export default {
   .image{
     height: 100%;
     height:190px;
+    max-height:190px;
     display: block;
   }
   .clearfix:before,
