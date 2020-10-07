@@ -87,9 +87,6 @@ export default {
     };
   },
   methods: {
-    getContent() {
-        return this.editorData;
-    },
     beforeAvatarUpload(file) {
       this.$emit("beforeAvatarUpload", file);
     },

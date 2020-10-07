@@ -20,7 +20,7 @@ export default new Router({
       component: NewsDetail
     },
     {
-      path: '/admin',
+      path: '/admin/:id/',
       name: 'Admin',
       component: Admin
     },
