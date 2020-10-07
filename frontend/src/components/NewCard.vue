@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div @click="ClickToDetail">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span class="title">{{title}}</span>
         <span class="date"><i class="el-icon-time">{{' '+ date}}</i></span>
       </div>
-      <el-container>
+      <el-container>c
         <el-main>
           <div class="summary">
             {{summary}}
@@ -30,7 +30,13 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    ClickToDetail: function(){
+        this.$router.push({
+          path: `/news/${this.id}`,
+        })
+    }
+  },
   mounted() {}
 };
 </script>
