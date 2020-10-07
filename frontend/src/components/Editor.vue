@@ -31,16 +31,16 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import { quillEditor, Quill } from "vue-quill-editor";
-import resizeImage from 'quill-image-resize-module'
-import { ImageDrop } from 'quill-image-drop-module';
-Quill.register('modules/imageDrop', ImageDrop);
-Quill.register('modules/resizeImage ', resizeImage )
-Vue.use(quillEditor)
+import { ImageDrop } from "quill-image-drop-module";
+import imageResize from 'quill-image-resize-module'
+Quill.register('modules/imageResize', imageResize)
+Quill.register("modules/imageDrop", ImageDrop);
+Vue.use(quillEditor);
 export default {
   name: "editor",
   components: { quillEditor },
@@ -63,7 +63,7 @@ export default {
       [{ color: [] }, { background: [] }], // dropdown with defaults from theme
       [{ font: [] }],
       [{ align: [] }],
-      ["image"],
+      ["image"]
     ];
     return {
       serviceUrl: process.env.API_ROOT + "api/pic",
@@ -71,7 +71,7 @@ export default {
         placeholder: "请输入内容",
         modules: {
           imageDrop: true,
-          imageResize:true,
+          imageResize: true,
           toolbar: {
             container: toolbarOptions,
             handlers: {
@@ -124,10 +124,8 @@ export default {
 </script>
 
 <style scoped>
-.quill-editor{
-    height: 55vh;
-    margin-bottom:70px; 
+.quill-editor {
+  height: 55vh;
+  margin-bottom: 70px;
 }
-
-
 </style>
