@@ -1,6 +1,7 @@
 <template>
   <div>
-    <NewCard v-for="(item, index) in current_news_data" :key=index
+    <NewCard v-for="item in current_news_data" 
+      :key=item.id      
       :title=item.title
       :date=item.date
       :image_url=item.cover
@@ -27,10 +28,11 @@ export default {
   data() {
     return {
       // api get data
-      current_news_data: [],
+      news_data: new Array(),
       news_total: 0,
+      current_news_data: [],
       // page set
-      current_page:0,
+      current_page:0, // init
       page_size:3,
     };
   },
@@ -38,7 +40,9 @@ export default {
     handleCurrentChange: function(cur_page){
       // el-pagination start from 1 not 0
       this.current_page = cur_page -1;
-      this.get_data_from_api();
+      if (!(this.current_page in this.news_data))
+        this.get_data_from_api();
+      this.current_news_data = this.news_data[this.current_page];
     },
     get_data_from_api:function(){
     var that = this;
@@ -50,6 +54,8 @@ export default {
           }
         })
       .then(function (response) {
+          //console.log("request!");
+          that.news_data[that.current_page] = response.data.results;
           that.current_news_data = response.data.results;
           that.news_total = response.data.count;
       })
@@ -57,10 +63,8 @@ export default {
         console.log(error);
         alert("get api data fail!")
       });
-  }
-
+    }
   },
-  computed:{},
   mounted () {
     this.get_data_from_api();
   },

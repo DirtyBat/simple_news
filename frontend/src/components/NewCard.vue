@@ -51,9 +51,8 @@ export default {
     font-size: 12px;
   }
   .image{
-    width: 100%;
-    max-height:270px;
-    max-width:480px;
+    height: 100%;
+    height:190px;
     display: block;
   }
   .clearfix:before,
