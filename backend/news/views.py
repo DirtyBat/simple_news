@@ -35,23 +35,23 @@ class NewsDetailView(viewsets.ModelViewSet):
 class SubmitNewsView(APIView):
     def post(self, request):
         data = request.data
-        title = data.get('title')
-        summary = data.get('summary')
-        headline = data.get('headline')
-        content = data.get('content')
-        cover = re.search(r'<img src="([^"]*)',content)
-        
-        if not cover:
-            cover = "http://47.103.209.239/api/pic/?code=ETfHx14vX3"
-        else:
-            cover = cover.group(1)
+        id = data.get('id')
 
-        NewsData(title=title,
-                 summary=summary,
-                 cover=cover,
-                 headline=headline,
-                 content=content).save()
-        
+        data['cover'] = re.search(r'<img src="([^"]*)', data.get('content'))
+        if not data['cover']:
+            data['cover'] = "http://47.103.209.239/api/pic/?code=ETfHx14vX3"
+        else:
+            data['cover'] = data['cover'].group(1)
+
+        news_data = None
+        if not id or id <= 0 or not NewsData.objects.filter(id=id):
+            news_data = NewsData()
+        else:
+            news_data = NewsData.objects.get(id=id)
+
+        news_data.__dict__.update(**data)
+        news_data.save()
+
         return Response({}, HTTP_200_OK)
 
 
