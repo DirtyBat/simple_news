@@ -45,7 +45,6 @@ export default {
         headline: this.headline,
         content: this.$refs.editor.editorData,
       };
-      console.log(this.$refs.editor.getContent());
       this.$axios.post("api/submit_news", postData);
     },
     getNewsData: function(id) {
