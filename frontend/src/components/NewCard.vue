@@ -13,7 +13,7 @@
         </el-main>
         <el-aside>
           <!--<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">-->
-          <img v-bind:src="image_url" class="image">
+          <el-image v-bind:src="image_url" class="image"></el-image>
         </el-aside>
       </el-container>
     </el-card>
@@ -57,9 +57,8 @@ export default {
     font-size: 12px;
   }
   .image{
-    height: 100%;
-    height:190px;
-    max-height:190px;
+    width: 100%;
+    object-fit: contain;
     display: block;
   }
   .clearfix:before,
@@ -71,7 +70,6 @@ export default {
     clear: both
   }
   .box-card {
-    width: 800px;
     border-radius: 8px;
   }
   .el-aside {
