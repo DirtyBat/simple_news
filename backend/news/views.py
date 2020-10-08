@@ -19,6 +19,11 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+import ConfigParser
+config = ConfigParser.ConfigParser()
+config.read('./config.ini')
+admin_password = config.get('admin','password')
+
 
 def token_update(func):
   def warpper(*args,**kwargs):
@@ -122,6 +127,9 @@ class TokenView(APIView):
     @token_update
     def get(self, request):
         data = request.query_params.dict()
+        password = data.get('password')
+        if not password or password != admin_password:
+            return Response({}, HTTP_400_BAD_REQUEST)
         return Response({'token':Token.objects.get(id=1).token}, HTTP_200_OK)
 
 
