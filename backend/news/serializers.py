@@ -10,4 +10,4 @@ class NewsDataSerializer(serializers.ModelSerializer):
 class NewsDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsData
-        exclude = ['headline', 'summary', 'cover']
+        exclude = ['cover']

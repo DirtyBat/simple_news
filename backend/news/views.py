@@ -8,15 +8,41 @@ from rest_framework.pagination import LimitOffsetPagination
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-from .models import NewsData, Pics
+from .models import NewsData, Pics, Token
 from .serializers import NewsDataSerializer, NewsDetailSerializer
 
 import random
 import string
 import re
+import time
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
+
+
+def token_update(func):
+  def warpper(*args,**kwargs):
+    new_token = ''.join(random.sample(string.ascii_letters + string.digits, 16))
+    if not Token.objects.filter(id=1):
+        Token(token=new_token).save()
+
+    old_token = Token.objects.get(id=1)
+    if str(old_token.date) != time.strftime("%Y-%m-%d", time.localtime()):
+        old_token.token = new_token
+        old_token.save()
+    return func(*args,**kwargs)
+  return warpper
+
+
+def token_check(func):
+  def warpper(*args,**kwargs):
+    data = args[1].data
+    token = data.get('token')
+    # 校验token
+    if not token or not Token.objects.filter(token=token):
+        return Response({"msg":"no token or token out of date."}, HTTP_400_BAD_REQUEST)
+    return func(*args,**kwargs)
+  return warpper
 
 
 class NewsDataView(viewsets.ModelViewSet):
@@ -33,6 +59,8 @@ class NewsDetailView(viewsets.ModelViewSet):
 
 
 class SubmitNewsView(APIView):
+    @token_update
+    @token_check
     def post(self, request):
         data = request.data
         id = data.get('id')
@@ -51,7 +79,20 @@ class SubmitNewsView(APIView):
 
         news_data.__dict__.update(**data)
         news_data.save()
+        return Response({}, HTTP_200_OK)
 
+
+class DeleteNewsView(APIView):
+    @token_update
+    @token_check
+    def post(self, request):
+        data = request.data
+        id = data.get('id')
+
+        if not NewsData.objects.filter(id=id):
+            return Response({}, HTTP_400_BAD_REQUEST)
+
+        NewsData.objects.get(id=id).delete()
         return Response({}, HTTP_200_OK)
 
 
@@ -74,6 +115,14 @@ class SubmitPicView(APIView):
         with open(pic_path, 'rb') as f:
             pic_data = f.read()
         return HttpResponse(pic_data, content_type="image/png")
+
+
+# 获取token
+class TokenView(APIView):
+    @token_update
+    def get(self, request):
+        data = request.query_params.dict()
+        return Response({'token':Token.objects.get(id=1).token}, HTTP_200_OK)
 
 
 # 前端入口
