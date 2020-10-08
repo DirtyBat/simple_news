@@ -44,7 +44,6 @@ export default {
       .then(response => {
         this.title = response.data[0].title;
         this.content = this.reFormatHtml(response.data[0].content);
-        console.log(this.content)
         this.date = response.data[0].date;
       });
   }

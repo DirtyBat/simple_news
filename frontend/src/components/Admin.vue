@@ -1,5 +1,6 @@
 <template>
   <div class="edit-page">
+    <Login></Login>
     <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:13px;margin-left:3px">
       <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
       <el-breadcrumb-item>Editor</el-breadcrumb-item>
@@ -24,9 +25,11 @@
 
 <script>
 import Editor from "./Editor";
+import Login from "./Login";
 export default {
   components: {
-    Editor
+    Editor,
+    Login
   },
   data() {
     return {
