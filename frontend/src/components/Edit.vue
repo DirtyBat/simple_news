@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-      id:"",
+      id: "",
       title: "",
       summary: "",
       headline: false
@@ -42,11 +42,12 @@ export default {
   methods: {
     sumbmitNews: function() {
       let postData = {
-        id:this.id,
+        token: this.$store.state.token,
+        id: this.id,
         title: this.title,
         summary: this.summary,
         headline: this.headline,
-        content: this.$refs.editor.editorData,
+        content: this.$refs.editor.editorData
       };
       this.$axios.post("api/submit_news", postData);
     },

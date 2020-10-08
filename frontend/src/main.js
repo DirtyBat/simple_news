@@ -26,8 +26,8 @@ const store = new Vuex.Store({
     token: "",
   },
   mutations: {
-    setLogin(state, isLogin, token) {
-      state.isLogin = isLogin;
+    setLogin(state, token) {
+      state.isLogin = true;
       state.token = token;
     }
   }

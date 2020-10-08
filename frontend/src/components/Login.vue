@@ -22,6 +22,7 @@ export default {
       return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
     },
     login: function() {
+      console.log(this.$store);
       let params = {
         password: this.password
       };
@@ -32,7 +33,7 @@ export default {
         .then(response => {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("tokenDate", this.getNowDate());
-          this.$store.commit("setLogin", true, response.data.token);
+          this.$store.commit("setLogin", response.data.token);
           this.$notify({
             title: "成功",
             message: "登录成功！",
@@ -49,7 +50,7 @@ export default {
       if (tokenDate == null || tokenDate !== this.getNowDate()) {
         return;
       }
-      this.$store.commit("setLogin", true, token);
+      this.$store.commit("setLogin", token);
     }
   },
   created() {
