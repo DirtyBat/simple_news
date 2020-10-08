@@ -10,7 +10,7 @@ class NewsData(models.Model):
     # 新闻主要内容
     content = models.CharField(max_length=300000, default="")
     # 创建日期
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(auto_now=True)
     # 是否是头条
     headline = models.BooleanField(default=False)
     # 简介
@@ -27,3 +27,10 @@ class Pics(models.Model):
     code = models.CharField(max_length=50,default="")
     # 图片
     pic = models.ImageField(upload_to="./pics/%Y-%m-%d")
+
+
+class Token(models.Model):
+    # token
+    token = models.CharField(max_length=20,default="")
+    # 创建日期
+    date = models.DateField(auto_now=True)
