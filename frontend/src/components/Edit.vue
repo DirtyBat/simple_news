@@ -13,7 +13,13 @@
     </el-input>
     <!-- 富文本编辑器 -->
     <Editor ref="editor"></Editor>
-    <el-button type="primary" round style="float:right;margin-top:5px" @click="sumbmitNews">提交</el-button>
+    <el-button
+      type="primary"
+      :loading="uploading"
+      round
+      style="float:right;margin-top:5px"
+      @click="sumbmitNews"
+    >提交</el-button>
     <el-switch
       v-model="headline"
       active-text="头条"
@@ -36,11 +42,13 @@ export default {
       id: "",
       title: "",
       summary: "",
+      uploading: false,
       headline: false
     };
   },
   methods: {
     sumbmitNews: function() {
+      this.uploading = true;
       let postData = {
         token: this.$store.state.token,
         id: this.id,
@@ -49,7 +57,9 @@ export default {
         headline: this.headline,
         content: this.$refs.editor.editorData
       };
-      this.$axios.post("api/submit_news", postData);
+      this.$axios.post("api/submit_news", postData).then(response => {
+          window.location = process.env.API_ROOT + "news/" + this.id;
+      });
     },
     getNewsData: function(id) {
       if (id <= 0) {

@@ -34,9 +34,8 @@ export default {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("tokenDate", this.getNowDate());
           this.$store.commit("setLogin", response.data.token);
-          this.$notify({
-            title: "成功",
-            message: "登录成功！",
+          this.$message({
+            message: "登录成功",
             type: "success"
           });
         });
