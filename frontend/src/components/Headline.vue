@@ -1,6 +1,6 @@
 <template>
-  <el-carousel :interval="4000" type="card" height="305px">
-    <el-carousel-item v-for="item in headlines" :key="item.id">
+  <el-carousel :interval="4000" type="card" height="330px">
+    <el-carousel-item v-for="(item, index) in headlines" :key="index" @click='handleClick(index, item.id)'>
       <el-card class="card">
         <el-image
           v-bind:src="item.cover"
@@ -19,13 +19,15 @@ import "element-ui/lib/theme-chalk/index.css";
 import App from "../App.vue";
 export default {
   name: "Headline",
+  components: {},
   data(){
       return{
           headlines:[]
       }
   },
   methods: {
-    handleClick: function (new_id) {
+    handleClick: function (index, new_id) {
+      console.log(new_id);
       this.$router.push({
         path: `/news/${new_id}`,
       });
@@ -58,7 +60,7 @@ export default {
   max-height: 250px;
 }
 .card {
-  height: 300px;
+  height: 325px;
   font-weight: bold;
   font-family: "PingFang SC";
   color: black;

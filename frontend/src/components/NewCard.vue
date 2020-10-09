@@ -58,8 +58,8 @@ export default {
   }
   .image{
     width: 100%;
-    object-fit: contain;
-    display: block;
+    height: 150px;
+    max-height: 150px;
   }
   .clearfix:before,
   .clearfix:after {
