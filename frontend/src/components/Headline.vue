@@ -1,7 +1,7 @@
 <template>
-  <el-carousel :interval="4000" type="card" height="330px">
-    <el-carousel-item v-for="(item, index) in headlines" :key="index" @click="handleClick(index, item.id)">
-      <el-card class="card">
+  <el-carousel :interval="4000" type="card" height="330px" @change="setCurIndex">
+    <el-carousel-item v-for="(item, index) in headlines" :key="index">
+      <el-card class="card" @click.native="handleClick(index, item.id)">
         <el-image
           v-bind:src="item.cover"
           class="image"
@@ -22,16 +22,21 @@ export default {
   components: {},
   data(){
       return{
-          headlines:[]
+          headlines:[],
+          cur_index:null,
       }
   },
   methods: {
     handleClick: function (index, new_id) {
-      console.log(new_id);
-      this.$router.push({
-        path: `/news/${new_id}`,
-      });
+      //console.log(index);
+      if (index == this.cur_index)
+        this.$router.push({
+          path: `/news/${new_id}`,
+        });
     },
+    setCurIndex: function (cur) {
+      this.cur_index = cur
+    }
   },
   mounted() {
     var that = this;

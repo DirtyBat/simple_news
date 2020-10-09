@@ -2,7 +2,7 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span class="title" @click="ClickToDetail">{{title}}</span>
+        <el-link :underline="false" class="title" @click="ClickToDetail" >{{title}}</el-link>
         <span class="date"><i class="el-icon-time">{{' '+ date}}</i></span>
       </div>
       <el-container>
