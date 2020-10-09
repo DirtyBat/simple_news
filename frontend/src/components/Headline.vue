@@ -1,6 +1,6 @@
 <template>
   <el-carousel :interval="4000" type="card" height="330px">
-    <el-carousel-item v-for="(item, index) in headlines" :key="index" @click='handleClick(index, item.id)'>
+    <el-carousel-item v-for="(item, index) in headlines" :key="index" @click="handleClick(index, item.id)">
       <el-card class="card">
         <el-image
           v-bind:src="item.cover"
@@ -60,7 +60,7 @@ export default {
   max-height: 250px;
 }
 .card {
-  height: 325px;
+  height: 327px;
   font-weight: bold;
   font-family: "PingFang SC";
   color: black;

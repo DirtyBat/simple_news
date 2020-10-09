@@ -1,8 +1,8 @@
 <template>
-  <div @click="ClickToDetail">
+  <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span class="title">{{title}}</span>
+        <span class="title" @click="ClickToDetail">{{title}}</span>
         <span class="date"><i class="el-icon-time">{{' '+ date}}</i></span>
       </div>
       <el-container>
@@ -13,7 +13,7 @@
         </el-main>
         <el-aside>
           <!--<img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">-->
-          <el-image v-bind:src="image_url" class="image"></el-image>
+          <el-image v-bind:src="image_url" class="image" @click="ClickToDetail"></el-image>
         </el-aside>
       </el-container>
     </el-card>
