@@ -59,6 +59,7 @@ export default {
             id: new_id,
           };
           this.$axios.post("api/delete_news", postData);
+          this.$router.go(0);
         })
         .catch((_) => {});
     },
