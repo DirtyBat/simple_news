@@ -18,17 +18,17 @@
           </a>
         </el-aside>
       </el-container>
+        <div v-if="is_login" class="login">
+          <el-link :underline="false" icon="el-icon-edit">编辑</el-link>
+          <el-link :underline="false" icon="el-icon-delete">删除</el-link>
+        </div>
     </el-card>
   </div>
 </template>
 <script>
-import Vue from 'vue';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import App from '../App.vue';
 export default {
   name: "NewCard",
-  props: ["title", "date", "image_url", "summary", "id"],
+  props: ["title", "date", "image_url", "summary", "id", "is_login"],
   data() {
     return {};
   },

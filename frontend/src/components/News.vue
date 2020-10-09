@@ -7,6 +7,7 @@
       :image_url=item.cover
       :summary=item.summary
       :id=item.id
+      :is_login=is_login
       style="margin: 5px;"
     >
     </NewCard>
@@ -33,8 +34,13 @@ export default {
       current_news_data: [],
       // page set
       current_page:0, // init
-      page_size:3,
+      page_size:4,
     };
+  },
+  computed:{
+    is_login:function(){
+      return this.$store.state.isLogin && this.$route.path == "/admin";
+    }
   },
   methods: {
     handleCurrentChange: function(cur_page){
