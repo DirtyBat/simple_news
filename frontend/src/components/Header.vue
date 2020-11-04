@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <img class="logo" src="@/assets/Eu_flag.png" width="70px" />
-    <span class="title">New Phase of EU-China relation for 2020-2030</span>
+    <img class="logo" src="@/assets/Logo.png" width="410px" />
+    <!-- <span class="title">New Phase of EU-China relation for 2020-2030</span> -->
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
 <style scoped>
 .header {
   position: absolute; 
-  line-height: 50px;
+  line-height: 80px;
   top: 0px;
   left: 0px;
   right: 0px;

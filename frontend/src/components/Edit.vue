@@ -13,19 +13,13 @@
     </el-input>
     <!-- 富文本编辑器 -->
     <Editor ref="editor"></Editor>
-    <el-button
-      type="primary"
-      :loading="uploading"
-      round
-      style="float:right;margin-top:5px"
-      @click="sumbmitNews"
-    >提交</el-button>
-    <el-switch
-      v-model="headline"
-      active-text="头条"
-      inactive-text="非头条"
-      style="margin-top:18px;margin-right:15px;float:right"
-    ></el-switch>
+    <div class="option-bar">
+      <el-switch v-model="headline" active-text="头条" inactive-text="非头条"></el-switch>
+      <el-select v-model="selectedType" placeholder="请选择文章分类">
+        <el-option v-for="(type,index) in types" :key="index" :label="type" :value="type"></el-option>
+      </el-select>
+      <el-button type="primary" :loading="uploading" round @click="sumbmitNews">提交</el-button>
+    </div>
   </div>
 </template>
 
@@ -43,7 +37,15 @@ export default {
       title: "",
       summary: "",
       uploading: false,
-      headline: false
+      headline: false,
+      selectedType: "The project",
+      types: [
+        "The project",
+        "Researchers",
+        "About China-EU relations",
+        "Project conferences and seminars",
+        "Results"
+      ]
     };
   },
   methods: {
@@ -55,10 +57,11 @@ export default {
         title: this.title,
         summary: this.summary,
         headline: this.headline,
-        content: this.$refs.editor.editorData
+        content: this.$refs.editor.editorData,
+        types: this.selectedType
       };
       this.$axios.post("api/submit_news", postData).then(response => {
-          window.location = process.env.API_ROOT + "news/" + this.id;
+        window.location = process.env.API_ROOT + "news/" + this.id;
       });
     },
     getNewsData: function(id) {
@@ -87,5 +90,12 @@ export default {
 <style scoped>
 .el-input {
   padding-bottom: 10px;
+}
+
+.option-bar {
+  line-height: 40px;
+  height: 40px;
+  float: right;
+  word-spacing: 10px;
 }
 </style>
