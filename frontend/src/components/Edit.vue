@@ -43,7 +43,7 @@ export default {
         "The project",
         "Researchers",
         "About China-EU relations",
-        "Project conferences and seminars",
+        "Conferences and seminars",
         "Results"
       ]
     };
