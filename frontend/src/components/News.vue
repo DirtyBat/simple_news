@@ -80,7 +80,13 @@ export default {
           alert("get api data fail!");
         });
     },
-    newsTypeChange: function(tag, event) {}
+    newsTypeChange: function(tag, event) {
+      this.get_data_from_api({
+        types: this.newsType,
+        limit: this.page_size,
+        offset: this.current_page * this.page_size
+      });
+    }
   },
   mounted() {
     this.get_data_from_api({
