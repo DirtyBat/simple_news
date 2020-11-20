@@ -61,7 +61,7 @@ export default {
         types: this.selectedType
       };
       this.$axios.post("api/submit_news", postData).then(response => {
-        window.location = process.env.API_ROOT + "news/" + this.id;
+        window.location = process.env.API_ROOT + "news/" + response.data.id;
       });
     },
     getNewsData: function(id) {
