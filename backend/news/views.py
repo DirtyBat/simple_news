@@ -55,7 +55,7 @@ class NewsDataView(viewsets.ModelViewSet):
     queryset = NewsData.objects.all()
     serializer_class = NewsDataSerializer
     pagination_class = LimitOffsetPagination
-    filter_fields = ('id', 'title', 'headline')
+    filter_fields = ('id', 'title', 'headline', 'types')
 
 
 class NewsDetailView(viewsets.ModelViewSet):
@@ -73,7 +73,7 @@ class SubmitNewsView(APIView):
 
         data['cover'] = re.search(r'<img src="([^"]*)', data.get('content'))
         if not data['cover']:
-            data['cover'] = ""
+            data['cover'] = "http://47.103.209.239/api/pic/?code=ETfHx14vX3"
         else:
             data['cover'] = data['cover'].group(1)
 
@@ -86,7 +86,7 @@ class SubmitNewsView(APIView):
 
         news_data.__dict__.update(**data)
         news_data.save()
-        return Response({}, HTTP_200_OK)
+        return Response({"id":news_data.id}, HTTP_200_OK)
 
 
 class DeleteNewsView(APIView):
