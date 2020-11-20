@@ -73,13 +73,14 @@ class SubmitNewsView(APIView):
 
         data['cover'] = re.search(r'<img src="([^"]*)', data.get('content'))
         if not data['cover']:
-            data['cover'] = "http://47.103.209.239/api/pic/?code=ETfHx14vX3"
+            data['cover'] = ""
         else:
             data['cover'] = data['cover'].group(1)
 
         news_data = None
         if not id or id <= 0 or not NewsData.objects.filter(id=id):
             news_data = NewsData()
+            del data['id']
         else:
             news_data = NewsData.objects.get(id=id)
 
