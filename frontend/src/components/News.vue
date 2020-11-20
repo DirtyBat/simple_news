@@ -1,12 +1,24 @@
 <template>
   <div>
-    <el-tabs v-model="newsType" @tab-click="newsTypeChange">
-      <el-tab-pane label="The project" name="The project"></el-tab-pane>
-      <el-tab-pane label="Researchers" name="Researchers"></el-tab-pane>
-      <el-tab-pane label="About China-EU relations" name="About China-EU relations"></el-tab-pane>
-      <el-tab-pane label="Conferences and seminars" name="Conferences and seminars"></el-tab-pane>
-      <el-tab-pane label="Results" name="Results"></el-tab-pane>
-    </el-tabs>
+    <el-row style="line-height:32px">
+      <el-col :span="$route.path == '/admin' ? 22 : 24">
+        <el-tabs v-model="newsType" @tab-click="newsTypeChange">
+          <el-tab-pane label="The project" name="The project"></el-tab-pane>
+          <el-tab-pane label="Researchers" name="Researchers"></el-tab-pane>
+          <el-tab-pane label="About China-EU relations" name="About China-EU relations"></el-tab-pane>
+          <el-tab-pane label="Conferences and seminars" name="Conferences and seminars"></el-tab-pane>
+          <el-tab-pane label="Results" name="Results"></el-tab-pane>
+        </el-tabs>
+      </el-col>
+      <el-col v-if="$route.path == '/admin'" :span="2" style="border-bottom:2px solid #e4e7ed;padding-bottom:5px;">
+        <el-button
+          type="primary"
+          size="small"
+          icon="el-icon-plus"
+          @click="openEditor"
+        >新增</el-button>
+      </el-col>
+    </el-row>
     <NewCard
       v-for="item in current_news_data"
       :key="item.id"
@@ -80,6 +92,9 @@ export default {
           alert("get api data fail!");
         });
     },
+    openEditor: function() {
+      window.location = process.env.API_ROOT + "edit/0";
+    },
     newsTypeChange: function(tag, event) {
       this.get_data_from_api({
         types: this.newsType,
@@ -99,4 +114,7 @@ export default {
 </script>
 
 <style scoped>
+.add-button {
+  float: right;
+}
 </style>
