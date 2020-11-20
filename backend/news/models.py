@@ -13,6 +13,8 @@ class NewsData(models.Model):
     date = models.DateField(auto_now=True)
     # 是否是头条
     headline = models.BooleanField(default=False)
+    # 分类
+    types = models.CharField(max_length=100, default="")
     # 简介
     summary = models.CharField(max_length=2000, default="")
     # 封面图片,等待设置一个默认连接
